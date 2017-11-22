@@ -54,7 +54,7 @@ class Detail extends Component {
         },
       },
     ]
-    for (let i = 0; i < 500; i+=1) {
+    for (let i = 0; i < 500; i += 1) {
       data.xValues.push(`${i}`)
       data.yValues[0].data.push(Math.random() * 100)
     }
