@@ -4,7 +4,7 @@
 ## App Architecture
 
 ```
-"native-base": "2.3.1",
+"native-base": "2.2.1",
 "react": "16.0.0-alpha.13",
 "react-native": "0.46.4",
 "react-navigation": "1.0.0-beta.11"
