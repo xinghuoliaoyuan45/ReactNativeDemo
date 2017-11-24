@@ -23,14 +23,16 @@ class Login extends Component {
     const { fetching } = this.props
     return (
       <View style={styles.container}>
-        {fetching
-          ? <ActivityIndicator />
-          : <Button title="Login" onPress={this.onLogin} />}
+        {fetching ? (
+          <ActivityIndicator />
+        ) : (
+          <Button title="Login" onPress={this.onLogin} />
+        )}
         {!fetching && <Button title="Close" onPress={this.onClose} />}
         <Spinner />
-        <Spinner color='red' />
-        <Spinner color='green' />
-        <Spinner color='blue' />
+        <Spinner color="red" />
+        <Spinner color="green" />
+        <Spinner color="blue" />
       </View>
     )
   }

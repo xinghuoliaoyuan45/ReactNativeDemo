@@ -10,11 +10,12 @@ class Home extends Component {
     header: null,
     title: 'Home',
     tabBarLabel: 'Home',
-    tabBarIcon: ({ focused, tintColor }) =>
+    tabBarIcon: ({ focused, tintColor }) => (
       <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
         source={require('../images/house.png')}
-      />,
+      />
+    ),
   }
 
   gotoDetail = () => {

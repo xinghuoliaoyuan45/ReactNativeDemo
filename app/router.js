@@ -91,8 +91,8 @@ class Router extends PureComponent {
   }
 
   /**
-  * return bool [true: 不返回主界面; false: 返回主界面]
-  */
+   * return bool [true: 不返回主界面; false: 返回主界面]
+   */
   backHandle = () => {
     const currentScreen = getCurrentScreen(this.props.router)
     if (currentScreen === 'Home' || currentScreen === 'Account') {

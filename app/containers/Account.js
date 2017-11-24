@@ -10,11 +10,12 @@ class Account extends Component {
     header: null,
     title: 'Account',
     tabBarLabel: 'Account',
-    tabBarIcon: ({ focused, tintColor }) =>
+    tabBarIcon: ({ focused, tintColor }) => (
       <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
         source={require('../images/person.png')}
-      />,
+      />
+    ),
   }
 
   gotoLogin = () => {
