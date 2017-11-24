@@ -7,7 +7,7 @@ import {
   addNavigationHelpers,
   NavigationActions,
 } from 'react-navigation'
-import { connect } from 'dva'
+import { connect } from 'react-redux'
 
 import Login from './containers/Login'
 import Home from './containers/Home'
@@ -90,9 +90,14 @@ class Router extends PureComponent {
     BackHandler.removeEventListener('hardwareBackPress', this.backHandle)
   }
 
+  /**
+  * return bool [true: 不返回主界面; false: 返回主界面]
+  */
   backHandle = () => {
     const currentScreen = getCurrentScreen(this.props.router)
-    console.log(currentScreen)
+    if (currentScreen === 'Home' || currentScreen === 'Account') {
+      return false
+    }
     this.props.dispatch(NavigationActions.back())
     return true
   }

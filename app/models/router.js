@@ -15,7 +15,11 @@ export default {
   state: {
     ...routerReducer(),
   },
-
+  reducers: {
+    apply(state, { payload: action }) {
+      return routerReducer(state, action)
+    },
+  },
   effects: {
     watch: [
       function* watch({ take, call, put }) {
@@ -34,11 +38,5 @@ export default {
       },
       { type: 'watcher' },
     ],
-  },
-
-  reducers: {
-    apply(state, { payload: action }) {
-      return routerReducer(state, action)
-    },
   },
 }

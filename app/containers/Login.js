@@ -1,26 +1,9 @@
 import React, { Component } from 'react'
-import { connect } from 'dva'
+import { StyleSheet, View, Button, ActivityIndicator } from 'react-native'
+import { connect } from 'react-redux'
+import { Spinner } from 'native-base'
 
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Button,
-  TouchableHighlight,
-} from 'react-native'
-import {
-  List,
-  ListItem,
-  Left,
-  Body,
-  Right,
-  Thumbnail,
-  Text,
-  Spinner,
-} from 'native-base'
-
-import { NavigationActions } from '../utils'
-import { prefix } from '../config'
+import { createAction, NavigationActions } from '../utils'
 
 @connect(({ app }) => ({ ...app }))
 class Login extends Component {
@@ -28,75 +11,36 @@ class Login extends Component {
     title: 'Login',
   }
 
-  getList = () => {
-    this.props.dispatch({
-      type: 'app/getList',
-      payload: {},
-    })
+  onLogin = () => {
+    this.props.dispatch(createAction('app/login')())
   }
-  clear = () => {
-    this.props.dispatch({
-      type: 'app/clear',
-      payload: {},
-    })
+
+  onClose = () => {
+    this.props.dispatch(NavigationActions.back())
   }
-  gotoDetail = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
-  }
+
   render() {
-    const { list } = this.props
+    const { fetching } = this.props
     return (
-      <ScrollView style={styles.wrap}>
-        <View style={styles.container}>
-          <Button title="get" onPress={this.getList} />
-          <Button title="clear" onPress={this.clear} />
-        </View>
-        <View>
-          <Spinner />
-          <Spinner color="red" />
-          <Spinner color="green" />
-          <Spinner color="blue" />
-        </View>
-        <View>
-          {list.length > 0 &&
-            list.map(({ title, doctor, language, poster, id }) =>
-              <TouchableHighlight key={id} onPress={this.gotoDetail}>
-                <View>
-                  <List>
-                    <ListItem avatar>
-                      <Left>
-                        <Thumbnail source={{ uri: `${prefix}${poster}` }} />
-                      </Left>
-                      <Body>
-                        <Text>{title}</Text>
-                        <Text note>{doctor}</Text>
-                      </Body>
-                      <Right>
-                        <Text note>{language}</Text>
-                      </Right>
-                    </ListItem>
-                  </List>
-                </View>
-              </TouchableHighlight>
-            )}
-        </View>
-      </ScrollView>
+      <View style={styles.container}>
+        {fetching
+          ? <ActivityIndicator />
+          : <Button title="Login" onPress={this.onLogin} />}
+        {!fetching && <Button title="Close" onPress={this.onClose} />}
+        <Spinner />
+        <Spinner color='red' />
+        <Spinner color='green' />
+        <Spinner color='blue' />
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  wrap: {
-    flex: 1,
-    overflow: 'scroll',
-  },
-  icon: {
-    width: '100%',
-    height: '100',
   },
 })
 

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Button } from 'react-native'
-import { connect } from 'dva'
+import { connect } from 'react-redux'
 
 import { NavigationActions } from '../utils'
 
 @connect()
 class Home extends Component {
   static navigationOptions = {
-    title: 'Home',
     header: null,
+    title: 'Home',
     tabBarLabel: 'Home',
     tabBarIcon: ({ focused, tintColor }) =>
       <Image

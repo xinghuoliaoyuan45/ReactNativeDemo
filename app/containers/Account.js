@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Button } from 'react-native'
-import { connect } from 'dva'
+import { connect } from 'react-redux'
 
 import { NavigationActions } from '../utils'
 
 @connect()
 class Account extends Component {
   static navigationOptions = {
-    title: 'Account',
     header: null,
+    title: 'Account',
     tabBarLabel: 'Account',
     tabBarIcon: ({ focused, tintColor }) =>
       <Image
