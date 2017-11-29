@@ -11,13 +11,14 @@ import { connect } from 'react-redux'
 
 import Login from './containers/Login'
 import Home from './containers/Home'
-import Account from './containers/Account'
+import Setting from './containers/Setting'
 import Detail from './containers/Detail'
+import Customize from './containers/Customize'
 
 const Tabbar = TabNavigator(
   {
     Home: { screen: Home },
-    Account: { screen: Account },
+    Setting: { screen: Setting },
   },
   {
     initialRouteName: 'Home',
@@ -29,16 +30,17 @@ const Tabbar = TabNavigator(
   }
 )
 
-const AppNavigator = StackNavigator(
+const App = StackNavigator(
   {
     Tabbar: { screen: Tabbar },
     Detail: { screen: Detail },
     Login: { screen: Login },
+    Customize: { screen: Customize },
   },
   {
     initialRouteName: 'Tabbar',
     headerMode: 'float',
-    mode: 'modal',
+    mode: 'card',
     navigationOptions: {
       gesturesEnabled: false,
     },
@@ -95,7 +97,7 @@ class Router extends PureComponent {
    */
   backHandle = () => {
     const currentScreen = getCurrentScreen(this.props.router)
-    if (currentScreen === 'Home' || currentScreen === 'Account') {
+    if (currentScreen === 'Home' || currentScreen === 'Setting') {
       return false
     }
     this.props.dispatch(NavigationActions.back())
@@ -105,12 +107,12 @@ class Router extends PureComponent {
   render() {
     const { dispatch, router } = this.props
     const navigation = addNavigationHelpers({ dispatch, state: router })
-    return <AppNavigator navigation={navigation} />
+    return <App navigation={navigation} />
   }
 }
 
 export function routerReducer(state, action = {}) {
-  return AppNavigator.router.getStateForAction(action, state)
+  return App.router.getStateForAction(action, state)
 }
 
 export default Router

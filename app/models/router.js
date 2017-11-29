@@ -1,4 +1,6 @@
-import { delay, NavigationActions } from '../utils'
+import { NavigationActions } from 'react-navigation'
+
+import { delay } from '../utils'
 import { routerReducer } from '../router'
 
 const actions = [

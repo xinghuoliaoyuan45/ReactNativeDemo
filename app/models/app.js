@@ -1,4 +1,6 @@
-import { createAction, NavigationActions } from '../utils'
+import { NavigationActions } from 'react-navigation'
+
+import { createAction } from '../utils'
 import * as authService from '../services/auth'
 
 export default {
@@ -21,10 +23,11 @@ export default {
       const login = yield call(authService.login, payload)
       if (login) {
         yield put(
-          NavigationActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'Tabbar' })],
-          })
+          // NavigationActions.reset({
+          //   index: 0,
+          //   actions: [NavigationActions.navigate({ routeName: 'Customize' })],
+          // })
+          NavigationActions.navigate({ routeName: 'Customize' })
         )
       }
       yield put(createAction('loginEnd')({ login }))
