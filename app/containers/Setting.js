@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Button } from 'react-native'
+import { StyleSheet, View, Image, Button, Text } from 'react-native'
 import { connect } from 'react-redux'
-
-import { NavigationActions } from '../utils'
+import { NavigationActions } from 'react-navigation'
 
 @connect()
-class Account extends Component {
+class Setting extends Component {
   static navigationOptions = {
     header: null,
-    title: 'Account',
-    tabBarLabel: 'Account',
+    title: 'Setting',
+    tabBarLabel: 'Setting',
     tabBarIcon: ({ focused, tintColor }) => (
       <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
@@ -22,10 +21,21 @@ class Account extends Component {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
 
+  gotoMap = () => {
+    console.log('click')
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'Customize',
+        params: { name: 'Customize' },
+      })
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Button title="Goto Login" onPress={this.gotoLogin} />
+        <Button title="Goto Customize" onPress={this.gotoMap} />
       </View>
     )
   }
@@ -43,4 +53,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Account
+export default Setting
