@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Button } from 'react-native'
 import { connect } from 'react-redux'
+import { Icon } from 'native-base'
 
 import { NavigationActions } from 'react-navigation'
 
 @connect()
-class Home extends Component {
+export default class Home extends Component {
   static navigationOptions = {
     header: null,
     title: 'Home',
@@ -22,10 +23,15 @@ class Home extends Component {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
   }
 
+  toggleDrawer = () => {
+    this.props.navigation.navigate('DrawerOpen');
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Button title="Goto Detail" onPress={this.gotoDetail} />
+        <Button title="openDrawer" onPress={this.toggleDrawer} />
       </View>
     )
   }
@@ -42,5 +48,3 @@ const styles = StyleSheet.create({
     height: 32,
   },
 })
-
-export default Home

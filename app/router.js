@@ -3,17 +3,20 @@ import { BackHandler, Animated, Easing } from 'react-native'
 import {
   StackNavigator,
   TabNavigator,
+  DrawerNavigator,
   TabBarBottom,
   addNavigationHelpers,
   NavigationActions,
 } from 'react-navigation'
 import { connect } from 'react-redux'
+import { Icon } from 'native-base'
 
 import Login from './containers/Login'
 import Home from './containers/Home'
 import Setting from './containers/Setting'
 import Detail from './containers/Detail'
 import Customize from './containers/Customize'
+import Drawer from './containers/Drawer'
 
 const Tabbar = TabNavigator(
   {
@@ -28,13 +31,14 @@ const Tabbar = TabNavigator(
     animationEnabled: true,
     lazyLoad: true,
   }
-)
+);
 
 const App = StackNavigator(
   {
     Tabbar: { screen: Tabbar },
     Detail: { screen: Detail },
     Login: { screen: Login },
+    Drawer: { screen: Drawer },
     Customize: { screen: Customize },
   },
   {
@@ -64,12 +68,36 @@ const App = StackNavigator(
           inputRange: [index - 1, index - 0.99, index],
           outputRange: [0, 1, 1],
         })
-
         return { opacity, transform: [{ translateY }] }
       },
     }),
   }
-)
+);
+
+const DrawerView = DrawerNavigator({
+  App: {
+    screen: App,
+    navigationOptions: {
+      drawerLabel: 'Home',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="home"></Icon>
+      ),
+    },
+  },
+  Drawer: {
+    screen: Drawer,
+    navigationOptions: {
+      drawerLabel: 'drawer',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="logo-apple"></Icon>
+      ),
+    },
+  },
+}, {
+  contentOptions: {
+    activeTintColor: '#e91e63',
+  },
+})
 
 function getCurrentScreen(navigationState) {
   if (!navigationState) {
@@ -93,7 +121,7 @@ class Router extends PureComponent {
   }
 
   /**
-   * return bool [true: 不返回主界面; false: 返回主界面]
+   * return: bool [true: 不返回主界面, false: 返回主界面]
    */
   backHandle = () => {
     const currentScreen = getCurrentScreen(this.props.router)
@@ -107,12 +135,12 @@ class Router extends PureComponent {
   render() {
     const { dispatch, router } = this.props
     const navigation = addNavigationHelpers({ dispatch, state: router })
-    return <App navigation={navigation} />
+    return <DrawerView navigation={navigation} />
   }
 }
 
 export function routerReducer(state, action = {}) {
-  return App.router.getStateForAction(action, state)
+  return DrawerView.router.getStateForAction(action, state)
 }
 
 export default Router
