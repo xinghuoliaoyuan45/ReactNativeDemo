@@ -31,7 +31,7 @@ const Tabbar = TabNavigator(
     animationEnabled: true,
     lazyLoad: true,
   }
-);
+)
 
 const App = StackNavigator(
   {
@@ -72,32 +72,31 @@ const App = StackNavigator(
       },
     }),
   }
-);
+)
 
-const DrawerView = DrawerNavigator({
-  App: {
-    screen: App,
-    navigationOptions: {
-      drawerLabel: 'Home',
-      drawerIcon: ({ tintColor }) => (
-        <Icon name="home"></Icon>
-      ),
+const DrawerView = DrawerNavigator(
+  {
+    App: {
+      screen: App,
+      navigationOptions: {
+        drawerLabel: 'Home',
+        drawerIcon: ({ tintColor }) => <Icon name="home" />,
+      },
+    },
+    Drawer: {
+      screen: Drawer,
+      navigationOptions: {
+        drawerLabel: 'drawer',
+        drawerIcon: ({ tintColor }) => <Icon name="logo-apple" />,
+      },
     },
   },
-  Drawer: {
-    screen: Drawer,
-    navigationOptions: {
-      drawerLabel: 'drawer',
-      drawerIcon: ({ tintColor }) => (
-        <Icon name="logo-apple"></Icon>
-      ),
+  {
+    contentOptions: {
+      activeTintColor: '#e91e63',
     },
-  },
-}, {
-  contentOptions: {
-    activeTintColor: '#e91e63',
-  },
-})
+  }
+)
 
 function getCurrentScreen(navigationState) {
   if (!navigationState) {

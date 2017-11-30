@@ -24,7 +24,7 @@ export default class Home extends Component {
   }
 
   toggleDrawer = () => {
-    this.props.navigation.navigate('DrawerOpen');
+    this.props.navigation.navigate('DrawerOpen')
   }
 
   render() {
