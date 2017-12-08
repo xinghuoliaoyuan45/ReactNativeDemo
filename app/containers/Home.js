@@ -19,6 +19,8 @@ export default class Home extends Component {
     ),
   }
 
+  componentDidMount() {}
+
   gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
   }

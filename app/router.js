@@ -10,12 +10,13 @@ import {
 } from 'react-navigation'
 import { connect } from 'react-redux'
 import { Icon } from 'native-base'
+import SplashScreen from 'react-native-splash-screen'
 
 import Login from './containers/Login'
 import Home from './containers/Home'
 import Setting from './containers/Setting'
 import Detail from './containers/Detail'
-import Customize from './containers/Customize'
+import Customize from './containers/animate/Customize'
 import Drawer from './containers/Drawer'
 
 const Tabbar = TabNavigator(
@@ -113,6 +114,10 @@ function getCurrentScreen(navigationState) {
 class Router extends PureComponent {
   componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this.backHandle)
+  }
+
+  componentDidMount() {
+    SplashScreen.hide()
   }
 
   componentWillUnmount() {

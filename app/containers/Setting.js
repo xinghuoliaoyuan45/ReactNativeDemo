@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Button, Text } from 'react-native'
+import { View, Image, Button, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+
+import styles from '../style/util'
 
 @connect()
 class Setting extends Component {
@@ -17,12 +19,31 @@ class Setting extends Component {
     ),
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      btns: [
+        {
+          title: 'gotoLogin',
+          func: this.gotoLogin,
+        },
+        {
+          title: 'gotoCustomize',
+          func: this.gotoCustomize,
+        },
+        {
+          title: 'gotoList',
+          func: this.gotoList,
+        },
+      ],
+    }
+  }
+
   gotoLogin = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
 
-  gotoMap = () => {
-    console.log('click')
+  gotoCustomize = () => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'Customize',
@@ -31,26 +52,27 @@ class Setting extends Component {
     )
   }
 
+  gotoList = () => {
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'List',
+        params: { name: 'List' },
+      })
+    )
+  }
+
   render() {
+    const { btns } = this.state
     return (
       <View style={styles.container}>
-        <Button title="Goto Login" onPress={this.gotoLogin} />
-        <Button title="Goto Customize" onPress={this.gotoMap} />
+        {btns.map(({ title, func }, i) => (
+          <View style={styles.btn} key={i}>
+            <Button title={title} onPress={func} />
+          </View>
+        ))}
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  icon: {
-    width: 32,
-    height: 32,
-  },
-})
 
 export default Setting
