@@ -3,14 +3,10 @@ import React, { Component } from 'react'
 class List extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-
-    };
+    this.state = {}
   }
 
   render() {
-    return (
-      <div>sdfa</div>
-    );
+    return <div>sdfa</div>
   }
 }
